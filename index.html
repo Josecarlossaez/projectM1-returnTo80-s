@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return to 80's</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!--<div class="container"> -->
+        <!--PANTALLA DE INICIO-->
+      <div id="splash-screen" class="container">
+        <h1> Return to 80's</h1>
+        <img id="image-pilot" src="./images/comandante.jpeg" width="300" alt="comandante">
+        <h2>Best Score:<span>0</span></h2>
+        <h3>Instrucciones</h3>
+        <p id="instrucciones">1. Pulsa el botón "Start" para comenzar el juego</p>
+        <p id="instrucciones">2. Utiliza las flechas para mover tu caza F22</p>
+        <p id="instrucciones">3. Pulsa la barra espaciadora para disparar</p>
+        <p id="instrucciones">4. No pestañees, volverás a la realidad</p>
+        <button id="button-start">Start</button>
+      </div>
+  
+        <!--PANTALLA DE JUEGO-->
+        <canvas id="my-canvas" width="525" height="800"></canvas> 
+
+        <!-- GAME OVER SCREEN--> 
+        <div id="gameover-screen" class="container">
+            <h4>GAME OVER</h4>
+            <img id="imageFinal" src="./images/aviónCrash.jpeg" width="300" alt="avion-crash">
+            <h5>Your Score:<span id="score">0</span></h5>
+            <button id="tryAgain">Try again</button>
+
+        </div>     
+
+
+
+    <!--</div>-->
+  
+    <script src="./javascript/main.js"></script>
+    <script src="./javascript/game.js"></script>
+    <script src="./javascript/avion.js"></script>
+    <script src="./javascript/enemigo.js"></script>
+    <script src="./javascript/asteroide.js"></script>
+</body>
+</html>

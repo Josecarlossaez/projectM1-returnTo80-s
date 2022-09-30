@@ -1,0 +1,43 @@
+#splash-screen{
+    background-image:url("../images/blackHole-s1.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    margin-left:200px;
+    margin-right:200px;
+}
+#image-pilot{
+    width: 100%;
+}
+#my-canvas{
+    background-image: url("../images/blackHole-s2.jpeg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction:column;
+    margin-left:200px;
+    margin-right:200px;
+
+}
+#gameover-screen{
+    background-color:black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction:column;
+    margin-left:200px;
+    margin-right:200px;
+    color:white;
+
+}
+#imageFinal{
+    width:100%
+}
