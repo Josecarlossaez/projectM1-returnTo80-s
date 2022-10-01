@@ -14,4 +14,14 @@ FASE 3:
 FASE 4:
 - ELEMENTO PRINCIPAL, AVIÓN COMANDANTE
     - Dibujado y posicionado del avión
-    - Esta    
+    - Generación de movimientos avión principal
+
+FASE 5:
+- ENEMIGO.
+    - Dibujado y posicionado en la pantalla
+    - Generación del movimiento y de la aleatoriedad en su salida    
+
+FASE 6:
+- OBSTÁCULO.
+    - Dibujado y posicionado en la pantalla
+    - Generación del movimiento y de la aleatoriedad en su salida    

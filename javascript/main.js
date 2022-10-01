@@ -4,6 +4,8 @@ const canvas = document.querySelector("#my-canvas")
 const ctx = canvas.getContext("2d")
 const startScreen = document.querySelector("#splash-screen")
 const gameOverScreen = document.querySelector("#gameover-screen")
+canvas.style.display="none"
+gameOverScreen.style.display = "none"
 // CREAMOS LA VARIABLE PARA CREAR EL OBJETO PERTENECIENTE A LA CLASE GAME
    // NO LA INICIALIZAMOS, LA INICIAMOS DENTRO DE LA FUNCIÓN, ASÍ LA PODREMOS
    // UTILIZAR DESDE TODAS LAS PARTES QUE QUERAMOS.
