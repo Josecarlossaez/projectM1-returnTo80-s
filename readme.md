@@ -24,4 +24,14 @@ FASE 5:
 FASE 6:
 - OBSTÁCULO.
     - Dibujado y posicionado en la pantalla
-    - Generación del movimiento y de la aleatoriedad en su salida    
+    - Generación del movimiento y de la aleatoriedad en su salida  
+
+FASE 7:
+- COLISIONES AVIÓN - ENEMY Y AVIÓN - ASTEROIDE   
+
+FASE 8:
+- DISPARO AVIÓN
+    - El misil aparece en la pantalla y se mueve
+    - El misil sale desde la punta del avión
+
+    

@@ -4,7 +4,7 @@ class Enemy{
     this.img.src = "./images/enemy.png"
 
     this.x = randomXint
-    this.y = 0
+    this.y = -70
     this.w = 70
     this.h = 70
     this.speed = 1
