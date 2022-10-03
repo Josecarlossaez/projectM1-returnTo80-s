@@ -14,6 +14,7 @@ this.avionObj = new Avion()
  this.asteroideArr = []
  this.misilAvionArr = []
  this.bangArr =[]
+ this.bombaEnemyArr = []
 
  // PARA CONTROLAR LA ENTRADA DE OBJETOS EN EL ARRAY, VAMOS A CREAR UN CONTADOR DE FRAMES
  this.frames = 0
@@ -21,10 +22,13 @@ this.avionObj = new Avion()
  // PARA QUE EL JUEGO SE DETENGA CREAMOS ESTA VARIABLE Y LE DAMOS UN VALOR BOOLEANO
  this.isGameOn= true
 
+ // CREACIÓN DE VARIABLES PARA POSICIONAMIENTO DE BOMBA CON RESPECTO A SU NAVE
+
  // CREACIÓN DE VARIABLES PARA POSICIONAMIENTO BANG CON RESPECTO A LA COLISIÓN
  let bangX;
  let bangY;
- 
+ // SCORE
+ this.score = 0
 }
 // MÉTODOS O ACCIONES DEL JUEGO
 
@@ -49,7 +53,7 @@ addAsteroide = () => {
 
 let nuevoAsteroide = new Asteriode(randomXint2)
 this.asteroideArr.push(nuevoAsteroide)
-console.log(this.asteroideArr)
+//console.log(this.asteroideArr)
 }
 }
 avionEnemyColission = () => {
@@ -61,7 +65,7 @@ avionEnemyColission = () => {
             this.avionObj.h + this.avionObj.y >eachEnemy.y
         ) {
             this.gameOver()
-            console.log( "colission")
+            //console.log( "colission")
         }
     })
 
@@ -89,17 +93,42 @@ addMisilAvion = () => {
     // console.log(this.misilAvionArr)
    
 }
-// distanceMisil = () => {
-//     let distanceY = this.avionObj.y - 400
-//     this.misilAvionArr.forEach((eachMisil) => {
-//         if (eachMisil.positionY < distanceY){
-//             this.misilAvionArr.splice(eachMisil, 1)
-//         }
-//     }) 
-// }
+addBombaEnemy = () => {
+    this.enemyArr.forEach((eachEnemy) => {
+        if( eachEnemy.y > 100 && this.frames % 360 === 0){
+            
+            let bombaPositionX = eachEnemy.x + 25
+            let bombaPositionY = eachEnemy.y + 100
+           
+            let nuevaBomba = new BombaEnemy(bombaPositionX, bombaPositionY)
+            this.bombaEnemyArr.push(nuevaBomba)
+        }
+    })
 
 
+   
+  
 
+    
+}
+
+
+deleteMisil = () => {
+    this.misilAvionArr.forEach((eachMisil,index) => {
+        if(eachMisil.y < 0){
+            this.misilAvionArr.splice(index,1)
+        }
+    }) 
+}
+deleteBomba = () => {
+    this.bombaEnemyArr.forEach((eachBomba, index) => {
+        if(eachBomba.y >760){
+            this.bombaEnemyArr.splice(index,1)
+        }
+    })
+}
+
+// COLISIONES
 
 disparoNaveColission = () => {
   this.enemyArr.forEach((eachEnemy, index) => {
@@ -113,6 +142,7 @@ disparoNaveColission = () => {
 
         this.misilAvionArr.splice(indexMisil,1)
         this.enemyArr.splice(index,1)
+        this.score= this.score +100
           
    } })
   })
@@ -146,6 +176,7 @@ disparoAsteroideColission = () => { this.asteroideArr.forEach((eachAsteroide, in
 
         this.misilAvionArr.splice(indexMisil,1)
         this.asteroideArr.splice(index,1)
+        this.score = this.score + 50
           
    } })
   })
@@ -162,6 +193,36 @@ disparoAsteroideColission = () => { this.asteroideArr.forEach((eachAsteroide, in
 
 }
 
+misilBombaColission = () => {
+    this.misilAvionArr.forEach((eachMisil,indexMisil) => {
+        this.bombaEnemyArr.forEach((eachBomba,index) => {
+            if(
+                eachMisil.x <eachBomba.x +eachBomba.w &&
+                eachMisil.x + eachMisil.w >eachBomba.x &&
+                eachMisil.y <eachBomba.y +eachBomba.h &&
+                eachMisil.h + eachMisil.y >eachBomba.y
+            ){ //console.log ("colission misil-bomba")
+    
+            this.misilAvionArr.splice(indexMisil,1)
+            this.bombaEnemyArr.splice(index,1)
+            this.score = this.score +200
+              console.log(score)
+       }
+        })
+    })
+}
+avionbombaColission = () => {
+    this.bombaEnemyArr.forEach((eachBomba) => {
+        if(
+        this.avionObj.x <eachBomba.x +eachBomba.w &&
+        this.avionObj.x + this.avionObj.w >eachBomba.x &&
+        this.avionObj.y <eachBomba.y +eachBomba.h &&
+        this.avionObj.h + this.avionObj.y >eachBomba.y  
+        ) {
+            this.gameOver()
+        }
+    }) 
+}
 gameOver = () => {
     // CAMBIAMOS LA CONDICIÓN QUE MANTIENE EL JUEGO EN MARCHA
     this.isGameOn = false
@@ -202,18 +263,30 @@ this.enemyArr.forEach((eachEnemy)  => {
     eachMisil.drawMisilAvion()
  })
 
+// dibujado bomba enemigo
+  this.bombaEnemyArr.forEach((eachBomba) => {
+    eachBomba.drawBombaEnemy()
+  })
+
  // dibujando BAng
 /*this.bangArr.forEach((eachBang) => {
     eachBang.drawBang()
  })*/
  
-
+// BORRADO DE DE ELEMENTOS
+this.deleteMisil()
+this.deleteBomba()
 
 // 3. ACCIONES O METODOS DE LOS ELEMENTOS
 this.avionEnemyColission()
 this.avionAsteroideColission()
+this.avionbombaColission()
 this.addEnemy()
 this.addAsteroide()
+this.addBombaEnemy()
+
+
+
 
 // MOVIMIENTO DEL ENEMY
 this.enemyArr.forEach((eachEnemy) => {
@@ -228,8 +301,15 @@ this.asteroideArr.forEach((eachAsteroide) => {
     this.misilAvionArr.forEach((eachMisil) => {
         eachMisil.moveMisilAvion()
     })
+// MOVIMIENTO DE LA BOMBA DEL ENEMIGO
+    this.bombaEnemyArr.forEach((eachBomba) => {
+        eachBomba.moveBombaEnemy()
+    })
+  
+
     this.disparoNaveColission()
     this.disparoAsteroideColission()
+    this.misilBombaColission() 
    
     // distancia misil
    // this.distanceMisil()

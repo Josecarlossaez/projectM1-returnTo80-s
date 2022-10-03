@@ -33,5 +33,21 @@ FASE 8:
 - DISPARO AVIÓN
     - El misil aparece en la pantalla y se mueve
     - El misil sale desde la punta del avión
+    - El misil se borra al salir del canvas
 
+FASE 9:
+- COLISIÓN MISIL-NAVE, Y COLISIÓN MISIL-ASTEROIDE
+    - Desaparición de la nave
+    - Desaparición del asteroide
+
+FASE 10:
+- DISPARO DEL ENEMIGO
+    - Dibujado y posicionado de la bomba 
+    - movimiento de la bomba
+    - desaparición de la bomba cuando salga fuera del canvas
+FASE 11:
+- COLISIÓN ENTRE MISIL Y BOMBA ENEMIGA
+    - Desaparecen los dos.
+
+    
     
