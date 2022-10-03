@@ -13,7 +13,7 @@ let gameObj;
 
 // BUTTONS
 const startBtn = document.querySelector("#button-start")
-const tryAgainBtn = document.querySelector("#tryAgain")
+const tryAgainBtnDOM = document.querySelector("#tryAgain")
 
 
 // STATE MANAGEMENT FUNCTIONS
@@ -37,6 +37,10 @@ gameObj.gameLoop()
 
 
 // ADD EVENT LISTENERS
+
+// BOTON RESTART
+
+tryAgainBtnDOM.addEventListener("click", startGame)
 
 startBtn.addEventListener("click", startGame)
 

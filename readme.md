@@ -49,5 +49,13 @@ FASE 11:
 - COLISIÓN ENTRE MISIL Y BOMBA ENEMIGA
     - Desaparecen los dos.
 
+FASE 12:
+- VIDAS
+FASE 13:
+- SCORE
+FASE 14:
+- BOTÓN RESTART
+
+
     
     

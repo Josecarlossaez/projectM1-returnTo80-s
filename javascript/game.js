@@ -29,6 +29,12 @@ this.avionObj = new Avion()
  let bangY;
  // SCORE
  this.score = 0
+ this.scoreDOM = document.querySelector("#score span")
+this.life = 3
+
+
+ 
+ 
 }
 // MÉTODOS O ACCIONES DEL JUEGO
 
@@ -57,14 +63,15 @@ this.asteroideArr.push(nuevoAsteroide)
 }
 }
 avionEnemyColission = () => {
-    this.enemyArr.forEach((eachEnemy) => {
+    this.enemyArr.forEach((eachEnemy,index) => {
         if(
             this.avionObj.x <eachEnemy.x +eachEnemy.w &&
             this.avionObj.x + this.avionObj.w >eachEnemy.x &&
             this.avionObj.y <eachEnemy.y +eachEnemy.h &&
             this.avionObj.h + this.avionObj.y >eachEnemy.y
         ) {
-            this.gameOver()
+            this.enemyArr.splice(index,1)
+            this.life = this.life - 1
             //console.log( "colission")
         }
     })
@@ -72,14 +79,15 @@ avionEnemyColission = () => {
 }
 
 avionAsteroideColission = () => {
-    this.asteroideArr.forEach((eachAsteroide) => {
+    this.asteroideArr.forEach((eachAsteroide,index) => {
         if(
         this.avionObj.x <eachAsteroide.x +eachAsteroide.w &&
         this.avionObj.x + this.avionObj.w >eachAsteroide.x &&
         this.avionObj.y <eachAsteroide.y +eachAsteroide.h &&
         this.avionObj.h + this.avionObj.y >eachAsteroide.y  
         ) {
-            this.gameOver()
+            this.asteroideArr.splice(index,1)
+            this.life = this.life - 1
         }
     })
 }
@@ -142,7 +150,8 @@ disparoNaveColission = () => {
 
         this.misilAvionArr.splice(indexMisil,1)
         this.enemyArr.splice(index,1)
-        this.score= this.score +100
+        this.score = this.score +100
+        this.scoreDOM.innerText = this.score
           
    } })
   })
@@ -176,7 +185,8 @@ disparoAsteroideColission = () => { this.asteroideArr.forEach((eachAsteroide, in
 
         this.misilAvionArr.splice(indexMisil,1)
         this.asteroideArr.splice(index,1)
-        this.score = this.score + 50
+         this.score = this.score + 50
+         this.scoreDOM.innerText = this.score
           
    } })
   })
@@ -206,24 +216,43 @@ misilBombaColission = () => {
             this.misilAvionArr.splice(indexMisil,1)
             this.bombaEnemyArr.splice(index,1)
             this.score = this.score +200
-              console.log(score)
+               console.log(this.score)
+               this.scoreDOM.innerText = this.score
+
        }
         })
     })
 }
+
 avionbombaColission = () => {
-    this.bombaEnemyArr.forEach((eachBomba) => {
+    this.bombaEnemyArr.forEach((eachBomba,index) => {
         if(
         this.avionObj.x <eachBomba.x +eachBomba.w &&
         this.avionObj.x + this.avionObj.w >eachBomba.x &&
         this.avionObj.y <eachBomba.y +eachBomba.h &&
         this.avionObj.h + this.avionObj.y >eachBomba.y  
         ) {
-            this.gameOver()
+            this.bombaEnemyArr.splice(index,1)
+            this.life = this.life - 1
         }
     }) 
 }
+
+drawScore = () => {
+    ctx.font = "30px Verdana";
+    ctx.fillStyle ="white"
+    
+    // (elTexto, posX, posY)
+    let scoreStr = `Score: ${this.score}         Life:${this.life}`
+    ctx.fillText(scoreStr, canvas.width * 0.2, 50)
+  }
+died = () => {
+    if (this.life === 0 ){
+        this.gameOver()
+    }
+}
 gameOver = () => {
+
     // CAMBIAMOS LA CONDICIÓN QUE MANTIENE EL JUEGO EN MARCHA
     this.isGameOn = false
     // OCULTAMOS EL CANVAS, Y MOSTRAMOS EL SCREEN DE GAME OVER
@@ -268,6 +297,9 @@ this.enemyArr.forEach((eachEnemy)  => {
     eachBomba.drawBombaEnemy()
   })
 
+//   DIBUJADO SCORE
+this.drawScore()
+
  // dibujando BAng
 /*this.bangArr.forEach((eachBang) => {
     eachBang.drawBang()
@@ -284,6 +316,7 @@ this.avionbombaColission()
 this.addEnemy()
 this.addAsteroide()
 this.addBombaEnemy()
+this.died()
 
 
 
