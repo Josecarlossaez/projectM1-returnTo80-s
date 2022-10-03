@@ -13,6 +13,7 @@ this.avionObj = new Avion()
  this.enemyArr = []
  this.asteroideArr = []
  this.misilAvionArr = []
+ this.bangArr =[]
 
  // PARA CONTROLAR LA ENTRADA DE OBJETOS EN EL ARRAY, VAMOS A CREAR UN CONTADOR DE FRAMES
  this.frames = 0
@@ -20,7 +21,9 @@ this.avionObj = new Avion()
  // PARA QUE EL JUEGO SE DETENGA CREAMOS ESTA VARIABLE Y LE DAMOS UN VALOR BOOLEANO
  this.isGameOn= true
 
- // CREACIÓN DE VARIABLES PARA POSICIONAMIENTO DE INICIO DE DISPARO DEL AVIÓN. CENTRAR MISIL EN AVION
+ // CREACIÓN DE VARIABLES PARA POSICIONAMIENTO BANG CON RESPECTO A LA COLISIÓN
+ let bangX;
+ let bangY;
  
 }
 // MÉTODOS O ACCIONES DEL JUEGO
@@ -29,8 +32,8 @@ this.avionObj = new Avion()
 addEnemy = () => {
 
 if(this.frames % 180 === 0 ){
-    let randomNum = Math.random() * 400
-    let randomXint = Math.floor(randomNum)
+    let randomXint = Math.random() * 400
+    
 
     let nuevoEnemy = new Enemy(randomXint)
 this.enemyArr.push(nuevoEnemy)
@@ -76,14 +79,86 @@ avionAsteroideColission = () => {
         }
     })
 }
-addDisparoAvion = () => {
+addMisilAvion = () => {
     let positionX = this.avionObj.x + 20
    let positionY = this.avionObj.y -30
 
     let nuevoMisil = new MisilAvion(positionX, positionY)
     this.misilAvionArr.push(nuevoMisil)
-    console.log("disparando misil")
-    console.log(this.misilAvionArr)
+    // console.log("disparando misil")
+    // console.log(this.misilAvionArr)
+   
+}
+// distanceMisil = () => {
+//     let distanceY = this.avionObj.y - 400
+//     this.misilAvionArr.forEach((eachMisil) => {
+//         if (eachMisil.positionY < distanceY){
+//             this.misilAvionArr.splice(eachMisil, 1)
+//         }
+//     }) 
+// }
+
+
+
+
+disparoNaveColission = () => {
+  this.enemyArr.forEach((eachEnemy, index) => {
+    this.misilAvionArr.forEach(( eachMisil,indexMisil) => {
+        if(
+            eachMisil.x <eachEnemy.x +eachEnemy.w &&
+            eachMisil.x + eachMisil.w >eachEnemy.x &&
+            eachMisil.y <eachEnemy.y +eachEnemy.h &&
+            eachMisil.h + eachMisil.y >eachEnemy.y
+        ){ console.log ("colission misil-nave")
+
+        this.misilAvionArr.splice(indexMisil,1)
+        this.enemyArr.splice(index,1)
+          
+   } })
+  })
+  
+        //  console.log(this.misilAvionArr[i])
+        //     console.log(this.enemyArr[j])
+        //    console.log("colission misil nave") 
+        //   
+           
+ // DAMOS VALOR A VARIABLES DE POSICIONAMIENTO BANG
+          /* bangX = this.misilAvionArr[i].x
+           bangY = this.misilAvionArr[i].y
+           let newBang = new Bang(bangX, bangY)
+    this.bangArr.push(newBang)*/         
+    
+  
+
+
+
+
+}
+
+disparoAsteroideColission = () => { this.asteroideArr.forEach((eachAsteroide, index) => {
+    this.misilAvionArr.forEach(( eachMisil, indexMisil) => {
+        if(
+            eachMisil.x <eachAsteroide.x +eachAsteroide.w &&
+            eachMisil.x + eachMisil.w >eachAsteroide.x &&
+            eachMisil.y <eachAsteroide.y +eachAsteroide.h &&
+            eachMisil.h + eachMisil.y >eachAsteroide.y
+        ){ console.log ("colission misil-asteroide")
+
+        this.misilAvionArr.splice(indexMisil,1)
+        this.asteroideArr.splice(index,1)
+          
+   } })
+  })
+  
+   
+             
+               
+     // DAMOS VALOR A VARIABLES DE POSICIONAMIENTO BANG
+              /* bangX = this.misilAvionArr[i].x
+               bangY = this.misilAvionArr[i].y
+               let newBang = new Bang(bangX, bangY)
+        this.bangArr.push(newBang)*/         
+ 
 
 }
 
@@ -126,6 +201,11 @@ this.enemyArr.forEach((eachEnemy)  => {
  this.misilAvionArr.forEach((eachMisil) => {
     eachMisil.drawMisilAvion()
  })
+
+ // dibujando BAng
+/*this.bangArr.forEach((eachBang) => {
+    eachBang.drawBang()
+ })*/
  
 
 
@@ -148,7 +228,11 @@ this.asteroideArr.forEach((eachAsteroide) => {
     this.misilAvionArr.forEach((eachMisil) => {
         eachMisil.moveMisilAvion()
     })
-
+    this.disparoNaveColission()
+    this.disparoAsteroideColission()
+   
+    // distancia misil
+   // this.distanceMisil()
 
 
 

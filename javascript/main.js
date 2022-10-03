@@ -55,7 +55,7 @@ window.addEventListener("keydown", (event) => {
      }
      if(event.code === "KeyF"){
         //insertar fórmula de disparo de misil
-        gameObj.addDisparoAvion()
+        gameObj.addMisilAvion()
         
      }
 
