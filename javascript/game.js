@@ -15,6 +15,7 @@ this.avionObj = new Avion()
  this.misilAvionArr = []
  this.bangArr =[]
  this.bombaEnemyArr = []
+ this.explosionArr = []
 
  // PARA CONTROLAR LA ENTRADA DE OBJETOS EN EL ARRAY, VAMOS A CREAR UN CONTADOR DE FRAMES
  this.frames = 0
@@ -22,15 +23,19 @@ this.avionObj = new Avion()
  // PARA QUE EL JUEGO SE DETENGA CREAMOS ESTA VARIABLE Y LE DAMOS UN VALOR BOOLEANO
  this.isGameOn= true
 
- // CREACIÓN DE VARIABLES PARA POSICIONAMIENTO DE BOMBA CON RESPECTO A SU NAVE
+ // CREACIÓN DE VARIABLE PARA ACTIVAR DIBUJADO DE BOMBA Y DE EXPLOSION
 
- // CREACIÓN DE VARIABLES PARA POSICIONAMIENTO BANG CON RESPECTO A LA COLISIÓN
- let bangX;
- let bangY;
+ this.añadirBang = false;
+ this.añadirExplosion = false
+ this.explosionX;
+ this.explosionY;
+
+ 
+ 
  // SCORE
  this.score = 0
  this.scoreDOM = document.querySelector("#score span")
-this.life = 3
+this.life = 5
 
 
  
@@ -38,7 +43,7 @@ this.life = 3
 }
 // MÉTODOS O ACCIONES DEL JUEGO
 
-// AÑADIR ENEMIGO
+// AÑADIR ELEMENTOS
 addEnemy = () => {
 
 if(this.frames % 180 === 0 ){
@@ -62,35 +67,9 @@ this.asteroideArr.push(nuevoAsteroide)
 //console.log(this.asteroideArr)
 }
 }
-avionEnemyColission = () => {
-    this.enemyArr.forEach((eachEnemy,index) => {
-        if(
-            this.avionObj.x <eachEnemy.x +eachEnemy.w &&
-            this.avionObj.x + this.avionObj.w >eachEnemy.x &&
-            this.avionObj.y <eachEnemy.y +eachEnemy.h &&
-            this.avionObj.h + this.avionObj.y >eachEnemy.y
-        ) {
-            this.enemyArr.splice(index,1)
-            this.life = this.life - 1
-            //console.log( "colission")
-        }
-    })
 
-}
 
-avionAsteroideColission = () => {
-    this.asteroideArr.forEach((eachAsteroide,index) => {
-        if(
-        this.avionObj.x <eachAsteroide.x +eachAsteroide.w &&
-        this.avionObj.x + this.avionObj.w >eachAsteroide.x &&
-        this.avionObj.y <eachAsteroide.y +eachAsteroide.h &&
-        this.avionObj.h + this.avionObj.y >eachAsteroide.y  
-        ) {
-            this.asteroideArr.splice(index,1)
-            this.life = this.life - 1
-        }
-    })
-}
+
 addMisilAvion = () => {
     let positionX = this.avionObj.x + 20
    let positionY = this.avionObj.y -30
@@ -119,7 +98,17 @@ addBombaEnemy = () => {
 
     
 }
+addBang = () => {
+ let bangX = this.avionObj.x 
+ let bangY = this.avionObj.y -30
+if (this.añadirBang === true){
+ let nuevoBang = new Bang(bangX,bangY)
+ this.bangArr.push(nuevoBang)
+}
+}
 
+
+//  BORRADO DE ELEMENTOS QUE SE SALEN DEL CANVAS POR ABAJO
 
 deleteMisil = () => {
     this.misilAvionArr.forEach((eachMisil,index) => {
@@ -138,6 +127,68 @@ deleteBomba = () => {
 
 // COLISIONES
 
+avionEnemyColission = () => {
+    this.enemyArr.forEach((eachEnemy,index) => {
+        if(
+            this.avionObj.x <eachEnemy.x +eachEnemy.w &&
+            this.avionObj.x + this.avionObj.w >eachEnemy.x &&
+            this.avionObj.y <eachEnemy.y +eachEnemy.h &&
+            this.avionObj.h + this.avionObj.y >eachEnemy.y
+        ) {
+            this.enemyArr.splice(index,1)
+            this.life = this.life - 1
+            
+            this.añadirBang = true
+            setTimeout(() =>{
+                this.añadirBang = false
+            }, 1)
+            
+            this.bangArr.forEach((eachBang,index) =>{
+                
+             setTimeout(() =>{
+                this.bangArr.splice(eachBang,1)
+             },1000)
+            }
+            )
+            setTimeout(() => {
+                this.avionObj.y = this.avionObj.y +50
+            },200)
+            
+            //console.log( "colission")
+        }
+    })
+
+}
+
+avionAsteroideColission = () => {
+    this.asteroideArr.forEach((eachAsteroide,index) => {
+        if(
+        this.avionObj.x <eachAsteroide.x +eachAsteroide.w &&
+        this.avionObj.x + this.avionObj.w >eachAsteroide.x &&
+        this.avionObj.y <eachAsteroide.y +eachAsteroide.h &&
+        this.avionObj.h + this.avionObj.y >eachAsteroide.y  
+        ) {
+            this.asteroideArr.splice(index,1)
+            this.life = this.life - 1
+
+            this.añadirBang = true
+            setTimeout(() =>{
+                this.añadirBang = false
+            }, 1)
+            
+            this.bangArr.forEach((eachBang,index) =>{
+                
+             setTimeout(() =>{
+                this.bangArr.splice(eachBang,1)
+             },1000)
+            }
+            )
+            setTimeout(() => {
+                this.avionObj.y = this.avionObj.y +50
+            },200)
+        }
+    })
+}
 disparoNaveColission = () => {
   this.enemyArr.forEach((eachEnemy, index) => {
     this.misilAvionArr.forEach(( eachMisil,indexMisil) => {
@@ -174,7 +225,8 @@ disparoNaveColission = () => {
 
 }
 
-disparoAsteroideColission = () => { this.asteroideArr.forEach((eachAsteroide, index) => {
+disparoAsteroideColission = () => { 
+    this.asteroideArr.forEach((eachAsteroide, index) => {
     this.misilAvionArr.forEach(( eachMisil, indexMisil) => {
         if(
             eachMisil.x <eachAsteroide.x +eachAsteroide.w &&
@@ -187,21 +239,26 @@ disparoAsteroideColission = () => { this.asteroideArr.forEach((eachAsteroide, in
         this.asteroideArr.splice(index,1)
          this.score = this.score + 50
          this.scoreDOM.innerText = this.score
+
+         // DIBUJADO DE EXPLOSIÓN
+          this.explosionX = eachMisil.x
+          this.explosionY = eachMisil.y
+          this.añadirExplosion = true
           
    } })
   })
   
    
              
-               
-     // DAMOS VALOR A VARIABLES DE POSICIONAMIENTO BANG
-              /* bangX = this.misilAvionArr[i].x
-               bangY = this.misilAvionArr[i].y
-               let newBang = new Bang(bangX, bangY)
-        this.bangArr.push(newBang)*/         
- 
+    
 
 }
+addExplosion = ()=> {
+    if (this.añadirExplosion === true){
+        let nuevaExplosion = new Explosion(explosionX,explosionY)
+        this.explosionArr.push(nuevaExplosion)
+    }
+    }
 
 misilBombaColission = () => {
     this.misilAvionArr.forEach((eachMisil,indexMisil) => {
@@ -234,9 +291,28 @@ avionbombaColission = () => {
         ) {
             this.bombaEnemyArr.splice(index,1)
             this.life = this.life - 1
+            this.avionObj.y = this.avionObj.y +50
+
+            this.añadirBang = true
+            setTimeout(() =>{
+                this.añadirBang = false
+            }, 1)
+            
+            this.bangArr.forEach((eachBang,index) =>{
+                
+             setTimeout(() =>{
+                this.bangArr.splice(eachBang,1)
+             },1000)
+            }
+            )
+            setTimeout(() => {
+                this.avionObj.y = this.avionObj.y +50
+            },200)
         }
     }) 
 }
+
+// DIBUJADO DEL SCORE Y VIDAS
 
 drawScore = () => {
     ctx.font = "20px Orbitron";
@@ -251,6 +327,8 @@ died = () => {
         this.gameOver()
     }
 }
+
+
 gameOver = () => {
 
     // CAMBIAMOS LA CONDICIÓN QUE MANTIENE EL JUEGO EN MARCHA
@@ -297,6 +375,15 @@ this.enemyArr.forEach((eachEnemy)  => {
     eachBomba.drawBombaEnemy()
   })
 
+  // DIBUJADO DE BANG
+ this.bangArr.forEach((eachBang) => {
+    eachBang.drawBang()
+ })
+ // DIBUJADO DE EXPLOSION
+ this.explosionArr.forEach((eachExplosion) => {
+    eachExplosion.drawExplosion()
+ })
+
 //   DIBUJADO SCORE
 this.drawScore()
 
@@ -317,6 +404,8 @@ this.addEnemy()
 this.addAsteroide()
 this.addBombaEnemy()
 this.died()
+this.addBang()
+this.addExplosion()
 
 this.avionObj.goUp()
 this.avionObj.goDown()

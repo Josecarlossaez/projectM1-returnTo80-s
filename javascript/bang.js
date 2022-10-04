@@ -1,11 +1,11 @@
 class Bang {
     constructor(bangX, bangY) {
         this.img = new Image()
-        this.img.src = "./images.bang.png"
+        this.img.src = "./images/bang.png"
         this.x = bangX
         this.y = bangY
-        this.w = 25
-        this.h = 25
+        this.w = 80
+        this.h = 80
     }
 
     // DIBUJADO DE BANG

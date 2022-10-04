@@ -16,6 +16,10 @@ const startBtn = document.querySelector("#button-start")
 const tryAgainBtnDOM = document.querySelector("#tryAgain")
 const homeBtnDOM = document.querySelector ("#home")
 
+// AUDIO
+const soundGameOver = new Audio('./music/gameOver.wav')
+const soundOngame = new Audio('./music/onGame.wav')
+
 
 // STATE MANAGEMENT FUNCTIONS
 
@@ -26,6 +30,7 @@ const startGame =() => {
     // mostramos la pantalla de juego
     canvas.style.display = "block"
     gameOverScreen.style.display= "none"
+    //soundOngame.play()
 
     // INICIALIZAMOS LA VARIABLE gameObj,
     // así ya podemos acceder a las funciones pertenecientes a Game.
