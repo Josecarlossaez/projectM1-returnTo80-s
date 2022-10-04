@@ -318,6 +318,11 @@ this.addAsteroide()
 this.addBombaEnemy()
 this.died()
 
+this.avionObj.goUp()
+this.avionObj.goDown()
+this.avionObj.goLeft()
+this.avionObj.goRight()
+
 
 
 

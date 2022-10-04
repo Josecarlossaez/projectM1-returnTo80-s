@@ -55,17 +55,17 @@ homeBtnDOM.addEventListener("click", screenStart)
 startBtn.addEventListener("click", startGame)
 
 window.addEventListener("keydown", (event) => {
-    if(event.code === "KeyW" && gameObj.avionObj.y > 0){
-    gameObj.avionObj.y = gameObj.avionObj.y - gameObj.avionObj.speed;
+    if(event.code === "KeyW"){
+    gameObj.avionObj.moveUp = true
      }
-     if (event.code === "KeyS" && gameObj.avionObj.y < canvas.height -70){
-        gameObj.avionObj.y = gameObj.avionObj.y + gameObj.avionObj.speed;  
+     if (event.code === "KeyS"){
+        gameObj.avionObj.moveDown = true 
      }
-     if (event.code === "KeyA" && gameObj.avionObj.x > 0){
-        gameObj.avionObj.x = gameObj.avionObj.x - gameObj.avionObj.speed;
+     if (event.code === "KeyA" ){
+        gameObj.avionObj.moveLeft = true;
      }
-     if ( event.code === "KeyD" && gameObj.avionObj.x < canvas.width - 50){
-        gameObj.avionObj.x = gameObj.avionObj.x + gameObj.avionObj.speed;
+     if ( event.code === "KeyD" ){
+        gameObj.avionObj.moveRight = true;
      }
      if(event.code === "KeyF"){
         //insertar fórmula de disparo de misil
@@ -77,6 +77,15 @@ window.addEventListener("keydown", (event) => {
 })
 window.addEventListener("keyup", (event) => {
     if (event.code === "KeyW"){
-        gameObj.avionObj.y=== false
+        gameObj.avionObj.moveUp = false;
+    }
+    if (event.code === "KeyS"){
+        gameObj.avionObj.moveDown = false;
+    }
+    if (event.code === "KeyA") {
+        gameObj.avionObj.moveLeft = false;
+    }
+    if (event.code === "KeyD") {
+        gameObj.avionObj.moveRight = false;
     }
 })
