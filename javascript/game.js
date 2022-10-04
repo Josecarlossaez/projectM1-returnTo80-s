@@ -239,12 +239,12 @@ avionbombaColission = () => {
 }
 
 drawScore = () => {
-    ctx.font = "30px Verdana";
-    ctx.fillStyle ="white"
+    ctx.font = "20px Orbitron";
+    ctx.fillStyle ="rgb(176, 176, 8)"
     
     // (elTexto, posX, posY)
-    let scoreStr = `Score: ${this.score}         Life:${this.life}`
-    ctx.fillText(scoreStr, canvas.width * 0.2, 50)
+    let scoreStr = `Score: ${this.score}                                          Life:${this.life}`
+    ctx.fillText(scoreStr, canvas.width * 0.1, 25)
   }
 died = () => {
     if (this.life === 0 ){

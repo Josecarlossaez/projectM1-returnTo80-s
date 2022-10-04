@@ -13,6 +13,8 @@ class Avion {
     this.h = 50
     // VELOCIDAD DE MOVIMIENTO
    this.speed = 20
+
+   // 
     }
 
 // METODOS O ACCIONES DEL AVION

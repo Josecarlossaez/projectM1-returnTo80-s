@@ -11,6 +11,8 @@
     margin-right:200px;
 }
 #image-pilot{
+    justify-content: center;
+    align-items: center;
     width: 100%;
 }
 #my-canvas{
@@ -40,4 +42,49 @@
 }
 #imageFinal{
     width:100%
+}
+h1 {
+    display:flex;
+    font-family: "Orbitron";
+   
+    color:rgb(176, 176, 8);
+    font-size :90px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom:20px;
+}
+h3{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Orbitron";
+    font-size: 40px;
+    padding-top:0;
+    padding-bottom: 0;
+    margin-top:0;
+    margin-bottom:0;
+    
+}
+#instrucciones{
+    font-family:"Orbitron";
+justify-content: center;
+align-items:center;
+margin-top:10;
+margin-bottom: 10px;
+color:rgb(176, 176, 8);
+}
+#button-start{
+    font-family:"Orbitron";
+    padding-top:20;
+
+}
+.botones{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top:100px;
+    margin-bottom: 100px;
+   
 }

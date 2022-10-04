@@ -14,6 +14,7 @@ let gameObj;
 // BUTTONS
 const startBtn = document.querySelector("#button-start")
 const tryAgainBtnDOM = document.querySelector("#tryAgain")
+const homeBtnDOM = document.querySelector ("#home")
 
 
 // STATE MANAGEMENT FUNCTIONS
@@ -34,6 +35,12 @@ const startGame =() => {
 gameObj.gameLoop()
 
 };
+const screenStart = () => {
+    startScreen.style.display = "flex"
+    // mostramos la pantalla de juego
+    canvas.style.display = "none"
+    gameOverScreen.style.display= "none" 
+}
 
 
 // ADD EVENT LISTENERS
@@ -42,19 +49,22 @@ gameObj.gameLoop()
 
 tryAgainBtnDOM.addEventListener("click", startGame)
 
+// BOTON HOME
+homeBtnDOM.addEventListener("click", screenStart)
+
 startBtn.addEventListener("click", startGame)
 
 window.addEventListener("keydown", (event) => {
-    if(event.code === "KeyW"){
+    if(event.code === "KeyW" && gameObj.avionObj.y > 0){
     gameObj.avionObj.y = gameObj.avionObj.y - gameObj.avionObj.speed;
      }
-     if (event.code === "KeyS"){
+     if (event.code === "KeyS" && gameObj.avionObj.y < canvas.height -70){
         gameObj.avionObj.y = gameObj.avionObj.y + gameObj.avionObj.speed;  
      }
-     if (event.code === "KeyA"){
+     if (event.code === "KeyA" && gameObj.avionObj.x > 0){
         gameObj.avionObj.x = gameObj.avionObj.x - gameObj.avionObj.speed;
      }
-     if ( event.code === "KeyD"){
+     if ( event.code === "KeyD" && gameObj.avionObj.x < canvas.width - 50){
         gameObj.avionObj.x = gameObj.avionObj.x + gameObj.avionObj.speed;
      }
      if(event.code === "KeyF"){
@@ -64,4 +74,9 @@ window.addEventListener("keydown", (event) => {
      }
 
   
+})
+window.addEventListener("keyup", (event) => {
+    if (event.code === "KeyW"){
+        gameObj.avionObj.y=== false
+    }
 })
