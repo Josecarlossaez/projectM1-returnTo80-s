@@ -35,6 +35,7 @@ const startGame =() => {
     gameOverScreen.style.display= "none"
     soundOngame.play()
    soundOngame.volume=0.1
+   soundOngame.loop = true;
 
     // INICIALIZAMOS LA VARIABLE gameObj,
     // así ya podemos acceder a las funciones pertenecientes a Game.

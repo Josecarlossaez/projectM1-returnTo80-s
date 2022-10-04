@@ -244,22 +244,36 @@ disparoAsteroideColission = () => {
          // DIBUJADO DE EXPLOSIÓN
           this.explosionX = eachMisil.x
           this.explosionY = eachMisil.y
-         // this.añadirExplosion = true
-        //   setTimeout(() =>{
-        //     this.añadirExplosion = false;
-        //      }, 1)
-            //  this.explosionArr.forEach((eachExplosion) => {
-            //     setTimeout(() => {
-            //         this.explosionArr.splice(eachExplosion,1)
-            //     }, 1000)
-            //  })
-         let explosion =setInterval(()=> {
-            this.añadirExplosion ===true
-            console.log("interval")
-         },750)
-         setTimeout(()=> {
-            clearInterval(explosion)
-         },1000)
+         this.añadirExplosion = true
+
+         this.explosionArr.forEach((eachExplosion,index) => {
+            setTimeout(() => {
+                this.explosionArr.splice(eachExplosion,3)
+            }, 1000)
+         })
+
+          setTimeout(() =>{
+            this.añadirExplosion = false;
+            console.log("añadirExplosion")
+             }, 19)
+
+
+             
+
+
+            // for (let i=0; i<this.explosionArr.length; i++){
+            //     this.explosionArr.shift()
+            // }
+            
+
+
+        //  let explosion =setInterval(()=> {
+        //     this.añadirExplosion ===true
+        //     console.log("interval")
+        //  },750)
+        //  setTimeout(()=> {
+        //     clearInterval(explosion)
+        //  },1000)
        
           
    } })
@@ -411,9 +425,9 @@ this.enemyArr.forEach((eachEnemy)  => {
 this.drawScore()
 
  // dibujando BAng
-/*this.bangArr.forEach((eachBang) => {
+this.bangArr.forEach((eachBang) => {
     eachBang.drawBang()
- })*/
+ })
  
 // BORRADO DE DE ELEMENTOS
 this.deleteMisil()
