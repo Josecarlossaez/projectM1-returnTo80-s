@@ -5,6 +5,7 @@ constructor (){
 // PROPIEDADES Y ELEMENTOS DEL JUEGO
 // CREAREMOS UNA CLASE GAME QUE LO VA A ENGLOBAR TODO, DESDE PROPIEDADES HASTA METODOS
 this.avionObj = new Avion()
+this.explosionObj = new Explosion()
 //this.enemyObj = new Enemy()
 
 // EN EL CASO DEL ENEMIGO Y DE LOS OBSTÁCULOS, NO CREAREMOS EL OBJETO IGUAL QUE EL AVIÓN =>
@@ -236,14 +237,30 @@ disparoAsteroideColission = () => {
         ){ console.log ("colission misil-asteroide")
 
         this.misilAvionArr.splice(indexMisil,1)
-        this.asteroideArr.splice(index,1)
+        //this.asteroideArr.splice(index,1)
          this.score = this.score + 50
          this.scoreDOM.innerText = this.score
 
          // DIBUJADO DE EXPLOSIÓN
           this.explosionX = eachMisil.x
           this.explosionY = eachMisil.y
-          this.añadirExplosion = true
+         // this.añadirExplosion = true
+        //   setTimeout(() =>{
+        //     this.añadirExplosion = false;
+        //      }, 1)
+            //  this.explosionArr.forEach((eachExplosion) => {
+            //     setTimeout(() => {
+            //         this.explosionArr.splice(eachExplosion,1)
+            //     }, 1000)
+            //  })
+         let explosion =setInterval(()=> {
+            this.añadirExplosion ===true
+            console.log("interval")
+         },750)
+         setTimeout(()=> {
+            clearInterval(explosion)
+         },1000)
+       
           
    } })
   })
@@ -254,8 +271,9 @@ disparoAsteroideColission = () => {
 
 }
 addExplosion = ()=> {
+    
     if (this.añadirExplosion === true){
-        let nuevaExplosion = new Explosion(explosionX,explosionY)
+        let nuevaExplosion = new Explosion(this.explosionX, this.explosionY)
         this.explosionArr.push(nuevaExplosion)
     }
     }
@@ -337,6 +355,11 @@ gameOver = () => {
     canvas.style.display = "none"
     // ACTIVAMOS LA PANTALLA GAME OVER
     gameOverScreen.style.display = "flex"
+
+    const soundGameOver = new Audio('./music/gameOver.wav')
+    soundOngame.pause()
+    soundGameOver.play()
+    soundGameOver.volume = 0.1
 
 
 }
