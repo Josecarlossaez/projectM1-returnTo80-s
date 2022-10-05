@@ -175,6 +175,7 @@ aumentoFrecuenciaEnemigo = () => {
       ) {
         this.enemyArr.splice(index, 1);
         this.life = this.life - 1;
+        this.avionObj.y = this.avionObj.y + 50;
 
         this.añadirBang = true;
         setTimeout(() => {
@@ -205,23 +206,61 @@ aumentoFrecuenciaEnemigo = () => {
       ) {
         this.asteroideArr.splice(index, 1);
         this.life = this.life - 1;
+        this.avionObj.y = this.avionObj.y + 50;
 
-        this.añadirBang = true;
-        setTimeout(() => {
-          this.añadirBang = false;
-        }, 1);
+           this.añadirBang = true;
+        // setTimeout(() => {
+        //   this.añadirBang = false;
+        // }, 1);
 
-        this.bangArr.forEach((eachBang, index) => {
-          setTimeout(() => {
-            this.bangArr.splice(eachBang, 1);
-          }, 1000);
-        });
-        setTimeout(() => {
-          this.avionObj.y = this.avionObj.y + 50;
-        }, 200);
+        // this.bangArr.forEach((eachBang, index) => {
+        //   setTimeout(() => {
+        //     this.bangArr.splice(eachBang, 1);
+        //   }, 1000);
+        // });
+        // setTimeout(() => {
+        //   this.avionObj.y = this.avionObj.y + 50;
+        // }, 200);
+     
+       
       }
     });
+    if (this.frames % 2 === 0) {
+      this.añadirBang = false;
+    }
+    if (this.frames % 60 === 0) {
+      this.bangArr.forEach((eachBang) => {
+        this.bangArr.splice(eachBang, 1);
+      });
+    }
   };
+  avionbombaColission = () => {
+    this.bombaEnemyArr.forEach((eachBomba, index) => {
+      if (
+        this.avionObj.x < eachBomba.x + eachBomba.w &&
+        this.avionObj.x + this.avionObj.w > eachBomba.x &&
+        this.avionObj.y < eachBomba.y + eachBomba.h &&
+        this.avionObj.h + this.avionObj.y > eachBomba.y
+      ) {
+        this.bombaEnemyArr.splice(index, 1);
+        this.life = this.life - 1;
+        this.avionObj.y = this.avionObj.y + 50;
+
+        this.añadirBang = true;
+       
+      }
+    });
+    if (this.frames % 2 === 0) {
+      this.añadirBang = false;
+    }
+    if (this.frames % 60 === 0) {
+      this.bangArr.forEach((eachBang) => {
+        this.bangArr.splice(eachBang, 1);
+      });
+    }
+  };
+
+
   disparoNaveColission = () => {
     this.enemyArr.forEach((eachEnemy, index) => {
       this.misilAvionArr.forEach((eachMisil, indexMisil) => {
@@ -274,14 +313,7 @@ aumentoFrecuenciaEnemigo = () => {
           this.explosionY = eachMisil.y;
           this.añadirExplosion = true;
 
-          if (this.frames % 2 === 0) {
-            this.añadirExplosion = false;
-          }
-          if (this.frames % 60 === 0) {
-            this.explosionArr.forEach((eachExplosion) => {
-              this.explosionArr.splice(eachExplosion, 1);
-            });
-          }
+       
 
           // for (let i=0; i<this.explosionArr.length; i++){
           //     this.explosionArr.shift()
@@ -297,6 +329,14 @@ aumentoFrecuenciaEnemigo = () => {
         }
       });
     });
+    if (this.frames % 2 === 0) {
+      this.añadirExplosion = false;
+    }
+    if (this.frames % 60 === 0) {
+      this.explosionArr.forEach((eachExplosion) => {
+        this.explosionArr.splice(eachExplosion, 1);
+      });
+    }
   };
   addExplosion = () => {
     if (this.añadirExplosion === true) {
@@ -326,34 +366,6 @@ aumentoFrecuenciaEnemigo = () => {
     });
   };
 
-  avionbombaColission = () => {
-    this.bombaEnemyArr.forEach((eachBomba, index) => {
-      if (
-        this.avionObj.x < eachBomba.x + eachBomba.w &&
-        this.avionObj.x + this.avionObj.w > eachBomba.x &&
-        this.avionObj.y < eachBomba.y + eachBomba.h &&
-        this.avionObj.h + this.avionObj.y > eachBomba.y
-      ) {
-        this.bombaEnemyArr.splice(index, 1);
-        this.life = this.life - 1;
-        this.avionObj.y = this.avionObj.y + 50;
-
-        this.añadirBang = true;
-        setTimeout(() => {
-          this.añadirBang = false;
-        }, 1);
-
-        this.bangArr.forEach((eachBang, index) => {
-          setTimeout(() => {
-            this.bangArr.splice(eachBang, 1);
-          }, 1000);
-        });
-        setTimeout(() => {
-          this.avionObj.y = this.avionObj.y + 50;
-        }, 200);
-      }
-    });
-  };
 
   // DIBUJADO DEL SCORE Y VIDAS
 
