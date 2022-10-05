@@ -1,5 +1,5 @@
 class Enemy{
- constructor(randomXint){
+ constructor(randomXint,speed){
     this.img = new Image()
     this.img.src = "./images/enemy.png"
 
@@ -7,9 +7,15 @@ class Enemy{
     this.y = -70
     this.w = 70
     this.h = 70
-    this.speed = 1
+    this.speed = speed
+    this.frames = 1
 
 }
+
+// aumentoFrames = ()=> {
+//   this.frames = this.frames +1
+// }
+ 
 
     // METODOS PARA ENEMIGO
 
@@ -22,6 +28,4 @@ class Enemy{
   moveEnemy = () => {
     this.y = this.y + this.speed
   }
-
-
 }
