@@ -23,6 +23,7 @@ class Game {
     // ESTA VARIABLE ES UNA CARACTERÍSTICA DEL JUEGO, POR ESO NO SE PUEDE CREAR DENTRO DE NINGUNA FUNCIÓN
     this.speedEnemy = 1
     this.speedAsteroide = 0.5
+    this.frecuenciaEnemigo = 120
 
     // PARA QUE EL JUEGO SE DETENGA CREAMOS ESTA VARIABLE Y LE DAMOS UN VALOR BOOLEANO
     this.isGameOn = true;
@@ -40,9 +41,9 @@ class Game {
     this.life = 5;
   }
   
-
+// BONUS AUMENTO VELOCIDAD
   aumentoSpeedEnemy = () =>{
-    if (this.frames % 600 === 0) {
+    if (this.frames % 600 === 0 && this.frames < 3600) {
         this.speedEnemy = this.speedEnemy + 0.5
        
         console.log ("Aumentando velocidad")
@@ -53,20 +54,30 @@ return this.speedEnemy
   }
 
   aumentoSpeedAsteroide = () =>{
-    if (this.frames % 600 === 0) {
+    if (this.frames % 600 === 0 && this.frames < 3600) {
         this.speedAsteroide = this.speedAsteroide + 0.5
     }
     return this.speedAsteroide
   }
+
+//BONUS AUMENTO DE ELEMENTOS EN CANVAS
+aumentoFrecuenciaEnemigo = () => {
+  if(this.frames % 1350 === 0) {
+    this.frecuenciaEnemigo = this.frecuenciaEnemigo/2
+  }
+}
+
+
   // MÉTODOS O ACCIONES DEL JUEGO
 
   // AÑADIR ELEMENTOS
   addEnemy = () => {
+    let frequency = this.frecuenciaEnemigo
    let speed = this.speedEnemy
 //   if (this.frames % 600 === 0){
 //   speed = speed + 1
   //}
-    if (this.frames % 120 === 0) {
+    if (this.frames % frequency === 0) {
       let randomXint = Math.random() * 400;
 
       let nuevoEnemy = new Enemy(randomXint,speed);
@@ -78,7 +89,7 @@ return this.speedEnemy
 
   addAsteroide = () => {
     let speed = this.speedAsteroide
-    if (this.frames % 540 === 0) {
+    if (this.frames % 420 === 0) {
       let randomNum2 = Math.random() * 400;
       let randomXint2 = Math.floor(randomNum2);
 
@@ -136,6 +147,21 @@ return this.speedEnemy
       }
     });
   };
+
+  deleteEnemigo = () => {
+    this.enemyArr.forEach((eachEnemy,index) => {
+      if (eachEnemy.y > 760){
+        this.enemyArr.splice(index,1)
+      }
+    })
+  }
+  deleteAsteroide = () => {
+    this.asteroideArr.forEach((eachAsteroide,index) => {
+      if(eachAsteroide.y > 760) {
+        this.asteroideArr.splice(index,1)
+      }
+    })
+  }
 
   // COLISIONES
 
@@ -369,6 +395,9 @@ return this.speedEnemy
     this.aumentoSpeedAsteroide() 
     this.aumentoSpeedEnemy()
     
+    //ACTIVACIÓN DE LA FUNCIÓN PARA AUMENTAR LA FRECUENCIA DE ELEMENTOS
+    this.aumentoFrecuenciaEnemigo()
+    
 
 
     // 1. LIMPIAR EL CANVAS
@@ -416,6 +445,8 @@ return this.speedEnemy
     // BORRADO DE DE ELEMENTOS
     this.deleteMisil();
     this.deleteBomba();
+    this. deleteEnemigo();
+    this.deleteAsteroide(); 
 
     // 3. ACCIONES O METODOS DE LOS ELEMENTOS
     this.avionEnemyColission();
