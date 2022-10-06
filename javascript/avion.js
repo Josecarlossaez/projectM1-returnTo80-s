@@ -38,7 +38,7 @@ drawAvion = () => {
     }
  }
 goLeft = () => {
-    if (this.moveLeft === true && this.x >5) {
+    if (this.moveLeft === true && this.x > 5) {
         this.x = this.x - this.speed;
     }
 }

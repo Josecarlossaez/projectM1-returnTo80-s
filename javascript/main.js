@@ -36,8 +36,9 @@ const startGame = () => {
 
   soundGameOver.pause();
   soundOngame.load();
+  soundOngame.volume = 0.01;
   soundOngame.play();
-  soundOngame.volume = 0.1;
+  
   soundOngame.loop = true;
 
   // INICIALIZAMOS LA VARIABLE gameObj,

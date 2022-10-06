@@ -124,11 +124,17 @@ aumentoFrecuenciaEnemigo = () => {
   addBang = () => {
     let bangX = this.avionObj.x;
     let bangY = this.avionObj.y - 30;
-    if (this.añadirBang === true) {
+    
       let nuevoBang = new Bang(bangX, bangY);
       this.bangArr.push(nuevoBang);
-    }
+    
   };
+  addExplosion = () => {
+   
+    let nuevaExplosion = new Explosion(this.explosionX, this.explosionY);
+    this.explosionArr.push(nuevaExplosion);
+  
+};
 
   //  BORRADO DE ELEMENTOS QUE SE SALEN DEL CANVAS POR ABAJO
 
@@ -177,23 +183,16 @@ aumentoFrecuenciaEnemigo = () => {
         this.life = this.life - 1;
         this.avionObj.y = this.avionObj.y + 50;
 
-        this.añadirBang = true;
-        setTimeout(() => {
-          this.añadirBang = false;
-        }, 1);
-
-        this.bangArr.forEach((eachBang, index) => {
-          setTimeout(() => {
-            this.bangArr.splice(eachBang, 1);
-          }, 1000);
-        });
-        setTimeout(() => {
-          this.avionObj.y = this.avionObj.y + 50;
-        }, 200);
+        this.addBang()
 
         //console.log( "colission")
       }
     });
+    if (this.frames % 60 === 0) {
+      this.bangArr.forEach((eachBang) => {
+        this.bangArr.splice(eachBang, 1);
+      });
+    }
   };
 
   avionAsteroideColission = () => {
@@ -208,7 +207,7 @@ aumentoFrecuenciaEnemigo = () => {
         this.life = this.life - 1;
         this.avionObj.y = this.avionObj.y + 50;
 
-           this.añadirBang = true;
+           this.addBang()
         // setTimeout(() => {
         //   this.añadirBang = false;
         // }, 1);
@@ -225,9 +224,7 @@ aumentoFrecuenciaEnemigo = () => {
        
       }
     });
-    if (this.frames % 2 === 0) {
-      this.añadirBang = false;
-    }
+    
     if (this.frames % 60 === 0) {
       this.bangArr.forEach((eachBang) => {
         this.bangArr.splice(eachBang, 1);
@@ -246,13 +243,11 @@ aumentoFrecuenciaEnemigo = () => {
         this.life = this.life - 1;
         this.avionObj.y = this.avionObj.y + 50;
 
-        this.añadirBang = true;
+       this.addBang()
        
       }
     });
-    if (this.frames % 2 === 0) {
-      this.añadirBang = false;
-    }
+  
     if (this.frames % 60 === 0) {
       this.bangArr.forEach((eachBang) => {
         this.bangArr.splice(eachBang, 1);
@@ -276,8 +271,9 @@ aumentoFrecuenciaEnemigo = () => {
           this.enemyArr.splice(index, 1);
           this.score = this.score + 100;
           this.scoreDOM.innerText = this.score;
+          soundMisilNaveBomba2.volume = 0.02
           soundMisilNaveBomba2.play()
-          soundMisilNaveBomba2.volume = 0.2
+          
         }
       });
     });
@@ -313,9 +309,10 @@ aumentoFrecuenciaEnemigo = () => {
           // DIBUJADO DE EXPLOSIÓN
           this.explosionX = eachMisil.x;
           this.explosionY = eachMisil.y;
+          soundMisilMetal.volume = 0.04
           soundMisilMetal.play()
-          soundMisilMetal.volume = 0.3
-          this.añadirExplosion = true;
+         this.addExplosion()
+         
 
        
 
@@ -333,21 +330,14 @@ aumentoFrecuenciaEnemigo = () => {
         }
       });
     });
-    if (this.frames % 2 === 0) {
-      this.añadirExplosion = false;
-    }
-    if (this.frames % 60 === 0) {
+    
+    if (this.frames % 30 === 0) {
       this.explosionArr.forEach((eachExplosion) => {
         this.explosionArr.splice(eachExplosion, 1);
       });
     }
   };
-  addExplosion = () => {
-    if (this.añadirExplosion === true) {
-      let nuevaExplosion = new Explosion(this.explosionX, this.explosionY);
-      this.explosionArr.push(nuevaExplosion);
-    }
-  };
+ 
 
   misilBombaColission = () => {
     this.misilAvionArr.forEach((eachMisil, indexMisil) => {
@@ -365,8 +355,9 @@ aumentoFrecuenciaEnemigo = () => {
           this.score = this.score + 200;
           console.log(this.score);
           this.scoreDOM.innerText = this.score;
+          soundMisilNaveBomba.volume = 0.02
           soundMisilNaveBomba.play()
-          soundMisilNaveBomba.volume = 0.2
+          
         }
       });
     });
@@ -398,9 +389,10 @@ aumentoFrecuenciaEnemigo = () => {
     gameOverScreen.style.display = "flex";
 
     soundOngame.pause();
+    soundGameOver.volume = 0.01;
     soundGameOver.play();
     soundGameOver.loop = true;
-    soundGameOver.volume = 0.1;
+    
   };
 
   // FUNCIÓN DE RECURSIÓN
@@ -474,8 +466,8 @@ aumentoFrecuenciaEnemigo = () => {
     this.addAsteroide();
     this.addBombaEnemy();
     this.died();
-    this.addBang();
-    this.addExplosion();
+    
+  
 
     this.avionObj.goUp();
     this.avionObj.goDown();
