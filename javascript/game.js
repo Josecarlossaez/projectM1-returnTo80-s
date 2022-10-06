@@ -276,6 +276,8 @@ aumentoFrecuenciaEnemigo = () => {
           this.enemyArr.splice(index, 1);
           this.score = this.score + 100;
           this.scoreDOM.innerText = this.score;
+          soundMisilNaveBomba2.play()
+          soundMisilNaveBomba2.volume = 0.2
         }
       });
     });
@@ -311,6 +313,8 @@ aumentoFrecuenciaEnemigo = () => {
           // DIBUJADO DE EXPLOSIÓN
           this.explosionX = eachMisil.x;
           this.explosionY = eachMisil.y;
+          soundMisilMetal.play()
+          soundMisilMetal.volume = 0.3
           this.añadirExplosion = true;
 
        
@@ -361,6 +365,8 @@ aumentoFrecuenciaEnemigo = () => {
           this.score = this.score + 200;
           console.log(this.score);
           this.scoreDOM.innerText = this.score;
+          soundMisilNaveBomba.play()
+          soundMisilNaveBomba.volume = 0.2
         }
       });
     });

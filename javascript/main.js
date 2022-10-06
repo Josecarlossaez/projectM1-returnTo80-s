@@ -20,6 +20,9 @@ const homeBtnDOM = document.querySelector("#home");
 
 const soundOngame = new Audio("./music/onGame.wav");
 const soundGameOver = new Audio("./music/gameOver.wav");
+const soundMisilNaveBomba = new Audio("./music/explosion-asteroide2.wav")
+const soundMisilNaveBomba2 = new Audio("./music/explosion-asteroide.wav")
+const soundMisilMetal = new Audio("./music/sonidoMetal.wav")
 
 // STATE MANAGEMENT FUNCTIONS
 
