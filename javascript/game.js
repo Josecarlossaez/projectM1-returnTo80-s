@@ -30,8 +30,7 @@ class Game {
 
     // CREACIÓN DE VARIABLE PARA ACTIVAR DIBUJADO DE BOMBA Y DE EXPLOSION
 
-    this.añadirBang = false;
-    this.añadirExplosion = false;
+   
     this.explosionX;
     this.explosionY;
 
@@ -39,7 +38,14 @@ class Game {
     this.score = 0;
     this.scoreDOM = document.querySelector("#score span");
     this.life = 5;
+
+    this.bestScoreDOM = document.querySelector("#bestScore span")
+  
   }
+ 
+  
+
+   
   
 // BONUS AUMENTO VELOCIDAD
   aumentoSpeedEnemy = () =>{
@@ -65,6 +71,7 @@ aumentoFrecuenciaEnemigo = () => {
   if(this.frames % 1350 === 0) {
     this.frecuenciaEnemigo = this.frecuenciaEnemigo/2
   }
+  return this.frecuenciaEnemigo
 }
 
 
@@ -377,10 +384,24 @@ aumentoFrecuenciaEnemigo = () => {
   died = () => {
     if (this.life === 0) {
       this.gameOver();
+      
     }
   };
 
   gameOver = () => {
+  // LOCAL STORAGE
+  let vestScore = "BestScore"
+  
+  
+
+  // función para  LOCAL STORAGE
+  
+   if (this.score > localStorage.getItem(vestScore)){
+    localStorage.setItem(vestScore,this.score)
+     this.bestScoreDOM.innerText = localStorage.getItem(vestScore)
+   }
+   
+
     // CAMBIAMOS LA CONDICIÓN QUE MANTIENE EL JUEGO EN MARCHA
     this.isGameOn = false;
     // OCULTAMOS EL CANVAS, Y MOSTRAMOS EL SCREEN DE GAME OVER

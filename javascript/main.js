@@ -24,6 +24,16 @@ const soundMisilNaveBomba = new Audio("./music/explosion-asteroide2.wav")
 const soundMisilNaveBomba2 = new Audio("./music/explosion-asteroide.wav")
 const soundMisilMetal = new Audio("./music/sonidoMetal.wav")
 
+
+   // LOCAL STORAGE
+  
+
+  
+  
+
+   
+
+
 // STATE MANAGEMENT FUNCTIONS
 
 const startGame = () => {
@@ -104,3 +114,4 @@ window.addEventListener("keyup", (event) => {
     gameObj.avionObj.moveRight = false;
   }
 });
+

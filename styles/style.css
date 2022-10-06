@@ -1,4 +1,6 @@
 #splash-screen{
+    width:525px;
+    height: 800px;
     background-image:url("../images/blackHole-s1.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -28,6 +30,8 @@
 
 }
 #gameover-screen{
+    width:525px;
+    height: 800px;
     background-color:black;
     background-repeat: no-repeat;
     background-size: cover;
@@ -54,7 +58,7 @@ h1 {
     text-align:center;
     margin-top: 20px;
     margin-bottom:20px;
-    flex-direction:column;
+    flex-flow: wrap;
 }
 h3{
     display:flex;
