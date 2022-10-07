@@ -44,11 +44,11 @@
     color:white;
 
 }
-/*#imageFinal{
+#imageFinal{
     width:100%;
     justify-content: center;
     align-items: center;
-}*/
+}
 h1 {
     display:flex;
     font-family: "Orbitron";
@@ -109,7 +109,8 @@ color:rgb(239, 239, 14);
 #gameOver{
     
  
-   
+   margin-top:0px;
+   margin-bottom:0px;
     font-family:"Orbitron";
     font-size:60px;
     color:rgb(192, 19, 19);
