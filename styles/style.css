@@ -44,11 +44,11 @@
     color:white;
 
 }
-#imageFinal{
+/*#imageFinal{
     width:100%;
     justify-content: center;
     align-items: center;
-}
+}*/
 h1 {
     display:flex;
     font-family: "Orbitron";
