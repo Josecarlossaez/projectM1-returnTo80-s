@@ -8,14 +8,11 @@ class Enemy{
     this.w = 70
     this.h = 70
     this.speed = speed
-    this.frames = 1
+  
 
 }
 
-// aumentoFrames = ()=> {
-//   this.frames = this.frames +1
-// }
- 
+
 
     // METODOS PARA ENEMIGO
 

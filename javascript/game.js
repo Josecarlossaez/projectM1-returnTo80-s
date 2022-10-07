@@ -52,7 +52,7 @@ class Game {
     if (this.frames % 600 === 0 && this.frames < 3600) {
         this.speedEnemy = this.speedEnemy + 0.5
        
-        console.log ("Aumentando velocidad")
+      
        
     }
 return this.speedEnemy
@@ -81,16 +81,14 @@ aumentoFrecuenciaEnemigo = () => {
   addEnemy = () => {
     let frequency = this.frecuenciaEnemigo
    let speed = this.speedEnemy
-//   if (this.frames % 600 === 0){
-//   speed = speed + 1
-  //}
+
     if (this.frames % frequency === 0) {
       let randomXint = Math.random() * 400;
 
       let nuevoEnemy = new Enemy(randomXint,speed);
       this.enemyArr.push(nuevoEnemy);
 
-      //console.log(this.enemyArr)
+   
     }
   };
 
@@ -102,7 +100,7 @@ aumentoFrecuenciaEnemigo = () => {
 
       let nuevoAsteroide = new Asteriode(randomXint2,speed);
       this.asteroideArr.push(nuevoAsteroide);
-      //console.log(this.asteroideArr)
+     
     }
   };
 
@@ -112,8 +110,7 @@ aumentoFrecuenciaEnemigo = () => {
 
     let nuevoMisil = new MisilAvion(positionX, positionY);
     this.misilAvionArr.push(nuevoMisil);
-    // console.log("disparando misil")
-    // console.log(this.misilAvionArr)
+  
   };
 
   addBombaEnemy = () => {
@@ -192,7 +189,6 @@ aumentoFrecuenciaEnemigo = () => {
 
         this.addBang()
 
-        //console.log( "colission")
       }
     });
     if (this.frames % 60 === 0) {
@@ -272,7 +268,7 @@ aumentoFrecuenciaEnemigo = () => {
           eachMisil.y < eachEnemy.y + eachEnemy.h &&
           eachMisil.h + eachMisil.y > eachEnemy.y
         ) {
-          console.log("colission misil-nave");
+          
 
           this.misilAvionArr.splice(indexMisil, 1);
           this.enemyArr.splice(index, 1);
@@ -285,16 +281,7 @@ aumentoFrecuenciaEnemigo = () => {
       });
     });
 
-    //  console.log(this.misilAvionArr[i])
-    //     console.log(this.enemyArr[j])
-    //    console.log("colission misil nave")
-    //
-
-    // DAMOS VALOR A VARIABLES DE POSICIONAMIENTO BANG
-    /* bangX = this.misilAvionArr[i].x
-           bangY = this.misilAvionArr[i].y
-           let newBang = new Bang(bangX, bangY)
-    this.bangArr.push(newBang)*/
+  
   };
 
   disparoAsteroideColission = () => {
@@ -306,7 +293,7 @@ aumentoFrecuenciaEnemigo = () => {
           eachMisil.y < eachAsteroide.y + eachAsteroide.h &&
           eachMisil.h + eachMisil.y > eachAsteroide.y
         ) {
-          console.log("colission misil-asteroide");
+         
 
           this.misilAvionArr.splice(indexMisil, 1);
           //this.asteroideArr.splice(index,1)
@@ -320,20 +307,6 @@ aumentoFrecuenciaEnemigo = () => {
           soundMisilMetal.play()
          this.addExplosion()
          
-
-       
-
-          // for (let i=0; i<this.explosionArr.length; i++){
-          //     this.explosionArr.shift()
-          // }
-
-          //  let explosion =setInterval(()=> {
-          //     this.añadirExplosion ===true
-          //     console.log("interval")
-          //  },750)
-          //  setTimeout(()=> {
-          //     clearInterval(explosion)
-          //  },1000)
         }
       });
     });
@@ -355,12 +328,12 @@ aumentoFrecuenciaEnemigo = () => {
           eachMisil.y < eachBomba.y + eachBomba.h &&
           eachMisil.h + eachMisil.y > eachBomba.y
         ) {
-          //console.log ("colission misil-bomba")
+         
 
           this.misilAvionArr.splice(indexMisil, 1);
           this.bombaEnemyArr.splice(index, 1);
           this.score = this.score + 200;
-          console.log(this.score);
+          
           this.scoreDOM.innerText = this.score;
           soundMisilNaveBomba.volume = 0.02
           soundMisilNaveBomba.play()
