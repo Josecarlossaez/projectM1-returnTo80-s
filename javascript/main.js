@@ -46,7 +46,7 @@ const startGame = () => {
 
   soundGameOver.pause();
   soundOngame.load();
-  soundOngame.volume = 0.01;
+  soundOngame.volume = 0.03;
   soundOngame.play();
   
   soundOngame.loop = true;

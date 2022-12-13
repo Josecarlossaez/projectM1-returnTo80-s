@@ -28,8 +28,6 @@ Inserción de música e imágenes en las colisiones
 
 
 
-Example:
-
 ## main.js
 
 - startGame()

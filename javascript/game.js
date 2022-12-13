@@ -274,7 +274,7 @@ aumentoFrecuenciaEnemigo = () => {
           this.enemyArr.splice(index, 1);
           this.score = this.score + 100;
           this.scoreDOM.innerText = this.score;
-          soundMisilNaveBomba2.volume = 0.02
+          soundMisilNaveBomba2.volume = 0.03
           soundMisilNaveBomba2.play()
           
         }
@@ -335,7 +335,7 @@ aumentoFrecuenciaEnemigo = () => {
           this.score = this.score + 200;
           
           this.scoreDOM.innerText = this.score;
-          soundMisilNaveBomba.volume = 0.02
+          soundMisilNaveBomba.volume = 0.03
           soundMisilNaveBomba.play()
           
         }
@@ -383,7 +383,7 @@ aumentoFrecuenciaEnemigo = () => {
     gameOverScreen.style.display = "flex";
 
     soundOngame.pause();
-    soundGameOver.volume = 0.01;
+    soundGameOver.volume = 0.03;
     soundGameOver.play();
     soundGameOver.loop = true;
     
